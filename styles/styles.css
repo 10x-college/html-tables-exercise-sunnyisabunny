@@ -44,12 +44,11 @@ body {
     background-color: var(--void-black);
     color: #e0e0e0;
     line-height: 1.7;
-    /* Global Vignette */
+    font-family: var(--font-header);
     background-image: url('../assets/Hero.png');
     background-attachment: fixed;
     background-size: cover;
     min-height: 100vh;
-    font-style: var(--font-header);
 }
 
 h1, h2, h3, th, button, summary, label, p, li, td {
@@ -70,7 +69,6 @@ h1, h2, h3, th, button, summary, label, p, li, td {
     border-bottom: 1px solid #333;
     position: relative;
     z-index: 1002;
-    font-style: var(--font-header);
 }
 
 .prophecy-container mark {
@@ -116,7 +114,6 @@ header h2 {
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: bold;
-    font-family: var(--font-header);
     transition: 0.3s;
     position: relative;
     padding: 5px 10px;
@@ -144,17 +141,13 @@ header h2 {
 }
 
 /* =========================================
-   4. HERO BANNER (Adapted for Hero.png)
+   4. HERO BANNER
    ========================================= */
 .hero-banner {
-    /* IMPORTANT: This path assumes Hero.png is in the assets folder.
-       If it is in the same folder as index.html, remove 'assets/' 
-    */
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), #050505), url('./assets/Hero.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Parallax Effect */
-    
+    background-attachment: fixed;
     height: 85vh;
     display: flex;
     flex-direction: column;
@@ -163,14 +156,6 @@ header h2 {
     position: relative;
     box-shadow: inset 0 0 100px #000;
 }
-
-/* .hero-banner::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.4); 
-    z-index: 1;
-} */
 
 .hero-banner h1, .hero-banner p, .hero-banner button {
     position: relative;
@@ -188,7 +173,6 @@ header h2 {
 }
 
 .hero-banner p {
-    font-family: var(--font-header);
     font-size: 1.1rem;
     color: #ddd;
     background: rgba(0,0,0,0.6);
@@ -197,25 +181,6 @@ header h2 {
     backdrop-filter: blur(5px);
     margin-bottom: 40px;
 }
-
-/* .hero-banner button {
-    padding: 18px 50px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #000;
-    background: var(--gold-primary);
-    border: none;
-    cursor: pointer;
-    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px var(--gold-glow);
-}
-
-.hero-banner button:hover {
-    background: #fff;
-    box-shadow: 0 0 40px #fff;
-    transform: scale(1.05);
-} */
 
 /* =========================================
    5. LAYOUT & SECTIONS
@@ -236,7 +201,6 @@ section {
     border-radius: 4px;
 }
 
-/* Gold Corners */
 section::after {
     content: ''; position: absolute; top: -1px; left: -1px; width: 30px; height: 30px;
     border-top: 2px solid var(--gold-primary); border-left: 2px solid var(--gold-primary);
@@ -259,7 +223,7 @@ section h2 {
    ========================================= */
 .heroes-container {
     display: flex;
-    flex-wrap: nowrap; /* Forces single row */
+    flex-wrap: nowrap;
     gap: 25px;
     justify-content: space-between;
     overflow-x: auto;
@@ -278,8 +242,8 @@ figure {
 
 figure img {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
+    height: 260px;      /* fixed height for nice display */
+    object-fit: cover;  /* ensures full coverage without distortion */
     display: block;
     filter: grayscale(60%) contrast(120%);
     transition: 0.5s;
@@ -307,28 +271,28 @@ figure:hover {
 figure:hover img { filter: grayscale(0%) contrast(110%); }
 figure:hover figcaption { opacity: 1; transform: translateY(0); }
 
+/* Compact heroes (optional) */
+.heroes-container.compact figure { max-width: 220px; }
+.heroes-container.compact img { height: 260px; }
+.heroes-container.compact figcaption { font-size: 0.75rem; }
+
 /* =========================================
-   7. LISTS & INTEL
+   7. LISTS & DETAILS
    ========================================= */
 ul, ol { padding-left: 20px; color: #ccc; }
 li { margin-bottom: 15px; }
-
 ol li::marker { color: var(--gold-primary); font-size: 1.2rem; font-weight: bold; }
 ul li::marker { color: var(--blood-red); }
 
 aside {
-    background: rgba(30, 0, 0, 0.4);
+    background: rgba(30,0,0,0.4);
     border-left: 3px solid var(--blood-red);
     padding: 20px;
     margin: 20px 0 40px 0;
     font-style: var(--font-header);
 }
 
-aside p {
-    color: #ffdddd;
-    font-size: 1rem;
-    font-style: var(--font-header);
-}
+aside p { color: #ffdddd; font-size: 1rem; font-style: var(--font-header); }
 
 details {
     background: #111;
@@ -337,27 +301,24 @@ details {
     transition: 0.3s;
     font-style: var(--font-header);
 }
-details[open] {
-    border-color: var(--blood-red);
-    box-shadow: 0 0 15px rgba(138, 11, 11, 0.2);
-    font-style: var(--font-header);
-}
+
+details[open] { border-color: var(--blood-red); box-shadow: 0 0 15px rgba(138,11,11,0.2); }
+
 summary {
-    padding: 20px; cursor: pointer; color: #fff; background: #1a1a1a;
-    list-style: none;
+    padding: 20px; cursor: pointer; color: #fff; background: #1a1a1a; list-style: none;
 }
+
 summary::after { content: '+'; float: right; color: var(--gold-primary); font-weight: bold; }
 details[open] summary::after { content: '-'; }
 details p { padding: 20px; color: #bbb; }
 
 /* =========================================
-   8. TABLE (Logistics)
+   8. TABLES
    ========================================= */
 table {
     width: 100%;
     border-collapse: separate; 
     border-spacing: 0 10px;
-    font-style: var(--font-header);
 }
 
 thead th {
@@ -379,11 +340,7 @@ tbody td {
 tbody td:first-child { border-left: 1px solid #333; border-radius: 5px 0 0 5px; color: #fff; font-weight: bold; }
 tbody td:last-child { border-right: 1px solid #333; border-radius: 0 5px 5px 0; }
 
-tbody tr:hover {
-    background: #202020;
-    transform: scale(1.01);
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.1);
-}
+tbody tr:hover { background: #202020; transform: scale(1.01); box-shadow: 0 0 15px rgba(197,160,89,0.1); }
 
 tfoot td {
     text-align: center; padding: 30px;
@@ -392,7 +349,7 @@ tfoot td {
 }
 
 /* =========================================
-   9. FORM (Fixed Layout)
+   9. FORMS
    ========================================= */
 form {
     background: #0f0f0f;
@@ -425,7 +382,7 @@ form input[type="text"], form select, form textarea {
 form input:focus, form select:focus, form textarea:focus {
     outline: none;
     border-color: var(--gold-primary);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 15px rgba(212,175,55,0.2);
 }
 
 input[type="radio"] { accent-color: var(--gold-primary); transform: scale(1.2); margin-right: 10px; }
